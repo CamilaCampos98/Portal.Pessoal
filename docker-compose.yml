@@ -24,6 +24,9 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: http://+:8080
+      PORT: 8080
+    volumes:
+      - ./secrets/google-credentials.json:/app/credentials.json:ro
     expose:
       - "8080"
 
