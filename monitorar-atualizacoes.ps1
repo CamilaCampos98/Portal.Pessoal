@@ -44,7 +44,13 @@ function Update-Repository {
     param([hashtable]$Repository)
 
     $repoPath = $Repository.Path
-    if (-not (Test-Path -LiteralPath (Join-Path $repoPath ".git"))) {
+    if (-not (Test-Path -LiteralPath $repoPath -PathType Container)) {
+        Write-UpdateLog "$($Repository.Name): pasta Git nao encontrada em $repoPath."
+        return
+    }
+
+    $insideWorkTree = & git -C $repoPath rev-parse --is-inside-work-tree 2>$null
+    if ($LASTEXITCODE -ne 0 -or $insideWorkTree -ne "true") {
         Write-UpdateLog "$($Repository.Name): pasta Git nao encontrada em $repoPath."
         return
     }
