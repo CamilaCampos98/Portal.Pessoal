@@ -19,11 +19,11 @@ Os projetos originais permanecem independentes. Este repositório apenas constr�
 
 ## Configuração
 
-1. Copie `.env.example` para `.env`.
-2. Preencha `GOOGLE_SHEETS_CREDENTIALS_JSON` em uma única linha e `GOOGLE_SHEETS_SPREADSHEET_ID`.
-3. Execute `./iniciar.ps1` no PowerShell.
-4. Confirme localmente em `http://localhost:8080`.
-5. Execute `./configurar-tailscale.ps1` e confira os endereços com `tailscale serve status`.
+1. Execute `./iniciar.ps1` no PowerShell.
+2. Confirme localmente em `http://localhost:8080`.
+3. Execute `./configurar-tailscale.ps1` e confira os endereços com `tailscale serve status`.
+
+A API usa a configuração de produção já existente em `../ControleFinanceiroAPI/ControleFinanceiroAPI/appsettings.Production.json` e a credencial existente em `wwwroot/credentials.json`. O arquivo `.env.example` fica disponível apenas para uma migração futura das credenciais para variáveis de ambiente.
 
 O Tailscale publica:
 
@@ -34,4 +34,3 @@ O Tailscale publica:
 ## Observação sobre o Soneca
 
 O aplicativo principal continua usando Google Apps Script. Os endpoints `/api/push/*` não estão presentes na pasta recebida; por isso, notificações push remotas dependem do backend em que esses endpoints estiverem hospedados. As demais funções e notificações locais permanecem independentes desse backend.
-
