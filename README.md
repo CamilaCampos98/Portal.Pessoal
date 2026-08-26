@@ -40,7 +40,7 @@ O monitor usa apenas `git pull --ff-only`, não altera repositórios com arquivo
 
 Consulte o histórico em `logs/atualizacoes.log`.
 
-Os caminhos específicos de cada máquina devem ficar no arquivo `.env`, que não é versionado. Use `.env.example` como referência. Assim, atualizações do `docker-compose.yml` não substituem os caminhos locais dos projetos, do Soneca ou da credencial Google.
+O `docker-compose.yml` acompanha a estrutura de diretórios da máquina servidora em `C:\Users\Família\repos`, incluindo os níveis internos dos projetos e a raiz publicada do Soneca.
 
 ## Observação sobre o Soneca
 

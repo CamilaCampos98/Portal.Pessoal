@@ -14,11 +14,11 @@ services:
     ports:
       - "127.0.0.1:8082:80"
     volumes:
-      - ${SONECA_WEB_ROOT:-../soneca}:/usr/share/nginx/html:ro
+      - ../soneca/ext/outputs/nap-pwa:/usr/share/nginx/html:ro
 
   financeiro-api:
     build:
-      context: ${FINANCEIRO_API_CONTEXT:-../ControleFinanceiroAPI/ControleFinanceiroAPI}
+      context: ../ControleFinanceiroAPI/ControleFinanceiroAPI/ControleFinanceiroAPI
     container_name: portal-financeiro-api
     restart: unless-stopped
     environment:
@@ -26,13 +26,13 @@ services:
       ASPNETCORE_URLS: http://+:8080
       PORT: 8080
     volumes:
-      - ${GOOGLE_CREDENTIALS_PATH:-./secrets/google-credentials.json}:/app/credentials.json:ro
+      - ../ControleFinanceiroAPI/ControleFinanceiroAPI/ControleFinanceiroAPI/wwwroot/credentials.json:/app/credentials.json:ro
     expose:
       - "8080"
 
   financeiro-web:
     build:
-      context: ${FINANCEIRO_WEB_CONTEXT:-../Portal.ControleFinanceiro/Portal.ControleFinanceiro}
+      context: ../Portal.ControleFinanceiro/Portal.ControleFinanceiro/Portal.ControleFinanceiro
     container_name: portal-financeiro-web
     restart: unless-stopped
     depends_on:
