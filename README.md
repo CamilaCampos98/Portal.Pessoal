@@ -40,6 +40,8 @@ O monitor usa apenas `git pull --ff-only`, não altera repositórios com arquivo
 
 Consulte o histórico em `logs/atualizacoes.log`.
 
+Os caminhos específicos de cada máquina devem ficar no arquivo `.env`, que não é versionado. Use `.env.example` como referência. Assim, atualizações do `docker-compose.yml` não substituem os caminhos locais dos projetos, do Soneca ou da credencial Google.
+
 ## Observação sobre o Soneca
 
 O aplicativo principal continua usando Google Apps Script. Os endpoints `/api/push/*` não estão presentes na pasta recebida; por isso, notificações push remotas dependem do backend em que esses endpoints estiverem hospedados. As demais funções e notificações locais permanecem independentes desse backend.
