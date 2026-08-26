@@ -21,11 +21,34 @@ if (-not $mutex.WaitOne(0, $false)) {
     exit 0
 }
 
+function Resolve-RepositoryPath {
+    param([string]$BasePath)
+
+    if (-not (Test-Path -LiteralPath $BasePath -PathType Container)) {
+        return $BasePath
+    }
+
+    $insideWorkTree = & git -C $BasePath rev-parse --is-inside-work-tree 2>$null
+    if ($LASTEXITCODE -eq 0 -and $insideWorkTree -eq "true") {
+        return (& git -C $BasePath rev-parse --show-toplevel 2>$null)
+    }
+
+    $gitMarker = Get-ChildItem -LiteralPath $BasePath -Filter ".git" -Force -Recurse -ErrorAction SilentlyContinue |
+        Sort-Object { $_.FullName.Length } |
+        Select-Object -First 1
+
+    if ($gitMarker) {
+        return $gitMarker.Parent.FullName
+    }
+
+    return $BasePath
+}
+
 $repositories = @(
-    @{ Name = "Portal Pessoal"; Path = $portalDir; Service = "portal" },
-    @{ Name = "Soneca"; Path = (Join-Path $reposDir "soneca"); Service = $null },
-    @{ Name = "Financeiro Web"; Path = (Join-Path $reposDir "Portal.ControleFinanceiro"); Service = "financeiro-web" },
-    @{ Name = "Financeiro API"; Path = (Join-Path $reposDir "ControleFinanceiroAPI"); Service = "financeiro-api" }
+    @{ Name = "Portal Pessoal"; Path = (Resolve-RepositoryPath $portalDir); Service = "portal" },
+    @{ Name = "Soneca"; Path = (Resolve-RepositoryPath (Join-Path $reposDir "soneca")); Service = $null },
+    @{ Name = "Financeiro Web"; Path = (Resolve-RepositoryPath (Join-Path $reposDir "Portal.ControleFinanceiro")); Service = "financeiro-web" },
+    @{ Name = "Financeiro API"; Path = (Resolve-RepositoryPath (Join-Path $reposDir "ControleFinanceiroAPI")); Service = "financeiro-api" }
 )
 
 function Wait-Docker {
