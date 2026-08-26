@@ -29,8 +29,8 @@ A API usa o ID da planilha da configuração de produção existente e recebe a 
 O Tailscale publica:
 
 - HTTPS 443: Portal Pessoal
-- HTTPS 8443: Controle Financeiro
-- HTTPS 10000: Soneca
+- HTTPS 8443: Soneca
+- HTTPS 10000: Controle Financeiro
 
 ## Atualização automática
 
