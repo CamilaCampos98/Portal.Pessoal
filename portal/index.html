@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08111f">
+  <title>Portal Pessoal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <span class="eyebrow">Ambiente privado</span>
+      <h1>Olá! O que você quer acessar?</h1>
+      <p>Seus sistemas ficam nesta máquina e são disponibilizados com segurança pela sua rede Tailscale.</p>
+    </header>
+
+    <section class="apps" aria-label="Sistemas disponíveis">
+      <a class="app-card app-card--soneca" id="sonecaLink" href="#">
+        <div class="app-icon" aria-hidden="true">☾</div>
+        <div class="app-content">
+          <span class="app-status"><i></i> Disponível</span>
+          <h2>Soneca</h2>
+          <p>Sonecas, mamadas, atividades e rotina do bebê.</p>
+          <span class="app-action">Abrir Soneca <b>→</b></span>
+        </div>
+      </a>
+
+      <a class="app-card app-card--financeiro" id="financeiroLink" href="#">
+        <div class="app-icon" aria-hidden="true">R$</div>
+        <div class="app-content">
+          <span class="app-status"><i></i> Disponível</span>
+          <h2>Controle Financeiro</h2>
+          <p>Resumo, compras, entradas, fixos e financiamentos.</p>
+          <span class="app-action">Abrir Financeiro <b>→</b></span>
+        </div>
+      </a>
+    </section>
+
+    <footer>
+      <span><i></i> Serviços executados localmente</span>
+      <small id="hostInfo"></small>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,45 @@
+services:
+  portal:
+    build:
+      context: ./portal
+    container_name: portal-pessoal
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:80"
+
+  soneca:
+    image: nginx:1.27-alpine
+    container_name: portal-soneca
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8082:80"
+    volumes:
+      - ../soneca:/usr/share/nginx/html:ro
+
+  financeiro-api:
+    build:
+      context: ../ControleFinanceiroAPI/ControleFinanceiroAPI
+    container_name: portal-financeiro-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+    expose:
+      - "8080"
+
+  financeiro-web:
+    build:
+      context: ../Portal.ControleFinanceiro/Portal.ControleFinanceiro
+    container_name: portal-financeiro-web
+    restart: unless-stopped
+    depends_on:
+      - financeiro-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080
+      UrlApi: http://financeiro-api:8080/api/
+    ports:
+      - "127.0.0.1:8081:8080"
+
