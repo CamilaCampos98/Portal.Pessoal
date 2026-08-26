@@ -28,8 +28,8 @@ function Resolve-RepositoryPath {
         return $BasePath
     }
 
-    $insideWorkTree = & git -C $BasePath rev-parse --is-inside-work-tree 2>$null
-    if ($LASTEXITCODE -eq 0 -and $insideWorkTree -eq "true") {
+    & git -C $BasePath rev-parse --is-inside-work-tree *> $null
+    if ($LASTEXITCODE -eq 0) {
         return (& git -C $BasePath rev-parse --show-toplevel 2>$null)
     }
 
@@ -72,8 +72,8 @@ function Update-Repository {
         return
     }
 
-    $insideWorkTree = & git -C $repoPath rev-parse --is-inside-work-tree 2>$null
-    if ($LASTEXITCODE -ne 0 -or $insideWorkTree -ne "true") {
+    & git -C $repoPath rev-parse --is-inside-work-tree *> $null
+    if ($LASTEXITCODE -ne 0) {
         Write-UpdateLog "$($Repository.Name): pasta Git nao encontrada em $repoPath."
         return
     }
@@ -136,6 +136,9 @@ function Update-Repository {
 
 try {
     Write-UpdateLog "Monitor de atualizacoes iniciado."
+    foreach ($repository in $repositories) {
+        Write-UpdateLog "$($repository.Name): repositorio resolvido em $($repository.Path)."
+    }
     Wait-Docker
     & docker compose --project-directory $portalDir up -d 2>&1 |
         ForEach-Object { Write-UpdateLog "Docker: $_" }
