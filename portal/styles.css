@@ -28,9 +28,11 @@ body {
 }
 
 .hero { max-width: 720px; }
+.portal-identity { display: flex; align-items: center; gap: .85rem; margin-bottom: 1.15rem; }
+.portal-identity img { width: 52px; height: 52px; border-radius: 14px; filter: drop-shadow(0 10px 20px rgba(0,0,0,.3)); }
 .eyebrow {
   display: inline-flex;
-  margin-bottom: 1rem;
+  margin: 0;
   padding: .42rem .72rem;
   border: 1px solid rgba(88, 214, 164, .3);
   border-radius: 999px;
@@ -86,4 +88,3 @@ footer span { display: flex; align-items: center; gap: .5rem; }
   .app-card { min-height: 220px; }
   footer { flex-direction: column; }
 }
-
