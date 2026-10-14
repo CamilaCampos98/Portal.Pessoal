@@ -41,5 +41,11 @@ services:
       ASPNETCORE_ENVIRONMENT: Production
       ASPNETCORE_URLS: http://+:8080
       UrlApi: http://financeiro-api:8080/api/
+      DataProtectionKeysPath: /app/data-protection-keys
+    volumes:
+      - financeiro-web-data-protection:/app/data-protection-keys
     ports:
       - "127.0.0.1:8081:8080"
+
+volumes:
+  financeiro-web-data-protection:
