@@ -42,6 +42,9 @@ services:
       ASPNETCORE_URLS: http://+:8080
       UrlApi: http://financeiro-api:8080/api/
       DataProtectionKeysPath: /app/data-protection-keys
+      Pluggy__ClientId: ${PLUGGY_CLIENT_ID:-}
+      Pluggy__ClientSecret: ${PLUGGY_CLIENT_SECRET:-}
+      Pluggy__ItemId: ${PLUGGY_ITEM_ID:-}
     volumes:
       - financeiro-web-data-protection:/app/data-protection-keys
     ports:
