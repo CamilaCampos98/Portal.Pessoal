@@ -45,6 +45,10 @@ services:
       Pluggy__ClientId: ${PLUGGY_CLIENT_ID:-}
       Pluggy__ClientSecret: ${PLUGGY_CLIENT_SECRET:-}
       Pluggy__ItemId: ${PLUGGY_ITEM_ID:-}
+      Pluggy__BradescoCamila__ItemId: ${PLUGGY_BRADESCO_CAMILA_ITEM_ID:-}
+      Pluggy__BradescoDiego__ClientId: ${PLUGGY_BRADESCO_DIEGO_CLIENT_ID:-}
+      Pluggy__BradescoDiego__ClientSecret: ${PLUGGY_BRADESCO_DIEGO_CLIENT_SECRET:-}
+      Pluggy__BradescoDiego__ItemId: ${PLUGGY_BRADESCO_DIEGO_ITEM_ID:-}
     volumes:
       - financeiro-web-data-protection:/app/data-protection-keys
     ports:
